@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: svca-service
+  cloud:
+    config:
+      uri: http://config:30876
+      fail-fast: true
+      username: user
+      password: ${CONFIG_SERVER_PASSWORD:password}
+      retry:
+        initial-interval: 2000
+        max-interval: 10000
+        multiplier: 2
+        max-attempts: 10
+#本地服务请求测试配置，读取对应的环境变量
+local:
+  feign:
+    server:
+      svcb-service:
+        url: ${FEIGN_URL_SVCBSERVICE:}
+

@@ -1,0 +1,13 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    kubernetes:
+      discovery:
+        enabled: true
+      client:
+        namespace: default
+
+sys:
+  config:
+    value: dev-svca-service-666

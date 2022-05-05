@@ -1,0 +1,32 @@
+server:
+  port: 8060
+
+management:
+  security:
+    enabled: false
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: service_a
+          uri: lb://svca-service
+          predicates:
+            - Path=/hello/**
+          filters:
+            - StripPrefix=1
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 20000
+
+ribbon:
+  ReadTimeout: 10000
+  ConnectTimeout: 10000

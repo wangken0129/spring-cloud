@@ -1,0 +1,26 @@
+ribbon:
+  ReadTimeout: 5000
+  ConnectTimeout: 5000
+
+#如果hystrix和sentinel都引入了，但是没有开启哪一个熔断器，默认会采用hystrix的;feign默认采用的也是hystrix
+#如果是HystrixTimer报的异常，则是hystix熔断触发的
+#如果sentinel指定的是关闭,hystirx没有指定，则也会是用hystrix
+#如果手动指定将sentinel和hystrix都设为了false，则会直接抛出异常，不会触发熔断处理
+feign:
+  hystrix:
+    enabled: true
+  sentinel:
+    enabled: false
+sys:
+  config:
+    value: dev456
+
+spring:
+  cloud:
+    kubernetes:
+      ribbon:
+        mode: service
+      discovery:
+        enabled: true
+      client:
+        namespace: default
